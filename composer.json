@@ -35,7 +35,7 @@
         "contao-bootstrap/components": "*"
     },
     "autoload": {
-        "psr-0": { "Netzmacht\\Bootstrap\\Tab\\": "src/" }
+        "psr-0": { "Netzmacht\\Bootstrap\\Tab": "src/" }
     },
     "extra":{
         "contao": {

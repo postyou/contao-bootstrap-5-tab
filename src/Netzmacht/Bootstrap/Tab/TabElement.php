@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @package   netzmacht-bootstrap
- * @author    netzmacht creative David Molineus
- * @license   MPL/2.0
- * @copyright 2013 netzmacht creative David Molineus
+ * @package   contao-bootstrap
+ * @author    David Molineus <david.molineus@netzmacht.de>
+ * @license   LGPL 3+
+ * @copyright 2013-2014 netzmacht creative David Molineus
  */
 
 namespace Netzmacht\Bootstrap\Tab;
