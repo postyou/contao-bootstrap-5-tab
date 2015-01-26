@@ -102,7 +102,7 @@ class TabElement extends Wrapper
         $ids  = array();
 
         foreach ($tabs as $i => $t) {
-            $cssId = standardize($t['title']);
+            $cssId = standardize($t['title']) . '-' . $this->id;
 
             if (in_array($cssId, $ids)) {
                 $cssId = $i . '-' . $cssId;
