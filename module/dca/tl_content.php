@@ -46,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_tabs'] = array
                 'inputType' => 'select',
                 'options'   => array('dropdown', 'child'),
                 'reference' => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_tabs_type'],
-                'eval'      => array('includeBlankOption' => true, 'style' => 'width: 140px;'),
+                'eval'      => array('includeBlankOption' => true, 'style' => 'width: 140px;', 'chosen' => true),
             ),
         )
     ),
