@@ -39,6 +39,24 @@ class TabStartElement extends AbstractTabElement
         $this->Template->currentItem = $this->getIterator()->current();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function generate()
+    {
+        if ($this->isBackendRequest()) {
+            $iterator = $this->getIterator();
+
+            if ($iterator) {
+                $iterator->rewind();
+            }
+
+            return $this->renderBackendView($this->getModel(), $iterator);
+        }
+
+        return parent::generate();
+    }
+
     protected function getIterator(): ?NavigationIterator
     {
         try {

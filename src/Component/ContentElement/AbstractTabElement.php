@@ -18,6 +18,7 @@ namespace ContaoBootstrap\Tab\Component\ContentElement;
 
 use Contao\BackendTemplate;
 use Contao\ContentElement;
+use Contao\ContentModel;
 use ContaoBootstrap\Tab\View\Tab\NavigationIterator;
 use ContaoBootstrap\Tab\View\Tab\TabRegistry;
 
@@ -35,7 +36,7 @@ abstract class AbstractTabElement extends ContentElement
                 $iterator->next();
             }
 
-            return $this->renderBackendView($this, $iterator);
+            return $this->renderBackendView($this->getParent(), $iterator);
         }
 
         return parent::generate();
@@ -68,7 +69,6 @@ abstract class AbstractTabElement extends ContentElement
         if ($start) {
             $colorRotate = static::getContainer()->get('contao_bootstrap.core.helper.color_rotate');
 
-            $template->name  = $start->bs_grid_name;
             $template->color = $colorRotate->getColor('ce:' . $start->id);
         }
 
@@ -77,7 +77,7 @@ abstract class AbstractTabElement extends ContentElement
         }
 
         if ($iterator) {
-            $template->classes = $iterator->current();
+            $template->name = $iterator->currentTitle();
         }
 
         return $template->parse();
@@ -100,4 +100,15 @@ abstract class AbstractTabElement extends ContentElement
      * @return NavigationIterator|null
      */
     abstract protected function getIterator(): ?NavigationIterator;
+
+
+    /**
+     * Get the parent model.
+     *
+     * @return ContentModel|null
+     */
+    protected function getParent():? ContentModel
+    {
+        return ContentModel::findByPk($this->bs_tab_parent);
+    }
 }

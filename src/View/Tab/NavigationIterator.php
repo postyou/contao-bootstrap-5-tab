@@ -130,9 +130,6 @@ final class NavigationIterator implements \Iterator
      */
     public function valid(): bool
     {
-        dump($this->currentItem);
-        dump($this->currentDropdownItem);
-
         if ($this->currentItem instanceof Dropdown) {
             return $this->currentDropdownItem instanceof NavItem;
         }
