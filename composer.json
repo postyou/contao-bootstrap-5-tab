@@ -39,6 +39,7 @@
         "psr-4": { "ContaoBootstrap\\Tab\\": "src/" }
     },
     "extra":{
+        "contao-manager-plugin": "ContaoBootstrap\\Tab\\ContaoManager\\Plugin",
         "contao": {
             "transifex": {
                 "project": "contao-bootstrap",
