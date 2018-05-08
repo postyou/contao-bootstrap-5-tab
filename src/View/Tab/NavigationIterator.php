@@ -68,6 +68,9 @@ final class NavigationIterator implements \Iterator
     public function __construct(Navigation $navigation)
     {
         $this->navigation = $navigation;
+        $this->items      = $navigation->items();
+
+        $this->rewind();
     }
 
     /**
@@ -100,6 +103,14 @@ final class NavigationIterator implements \Iterator
         }
 
         $this->currentItem = next($this->items) ?: null;
+
+        if ($this->currentItem instanceof Dropdown) {
+            $this->dropdownItems = $this->currentItem->items();
+            $this->currentDropdownItem = current($this->dropdownItems);
+        } else {
+            $this->dropdownItems = [];
+            $this->currentDropdownItem = null;
+        }
     }
 
     /**
@@ -119,6 +130,9 @@ final class NavigationIterator implements \Iterator
      */
     public function valid(): bool
     {
+        dump($this->currentItem);
+        dump($this->currentDropdownItem);
+
         if ($this->currentItem instanceof Dropdown) {
             return $this->currentDropdownItem instanceof NavItem;
         }

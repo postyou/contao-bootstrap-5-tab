@@ -36,5 +36,6 @@ final class ContaoBootstrapTabExtension extends Extension
         );
 
         $loader->load('services.xml');
+        $loader->load('listener.xml');
     }
 }

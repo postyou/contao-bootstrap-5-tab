@@ -1,2 +1,3 @@
+<?= $this->insert('bs_tab_nav', $this->getData()) ?>
 <div class="tab-content">
-    <div class="tab-pane" id="<?= $this->tab->id ?>" role="tabpanel" aria-labelledby="<?= $this->tab->navId ?>">
+    <div class="tab-pane<?php if ($this->currentItem->active()): ?> active<?php endif ?>" id="<?= $this->currentItem->cssId() ?>" role="tabpanel" aria-labelledby="<?= $this->currentItem->navCssId() ?>">

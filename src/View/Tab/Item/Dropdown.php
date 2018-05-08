@@ -25,21 +25,7 @@ class Dropdown extends NavItem implements ItemList
     /**
      * @var array|NavItem[]
      */
-    private $items;
-
-    /**
-     * Dropdown constructor.
-     *
-     * @param string      $title
-     * @param array       $items
-     * @param string|null $cssId
-     */
-    public function __construct(string $title, array $items, string $cssId = null)
-    {
-        parent::__construct($title, false, $cssId);
-
-        $this->items = $items;
-    }
+    private $items = [];
 
     /**
      * {@inheritdoc}

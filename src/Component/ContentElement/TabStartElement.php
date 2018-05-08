@@ -15,12 +15,13 @@ declare(strict_types=1);
 
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
-use Contao\ContentElement;
+use Assert\AssertionFailedException;
+use ContaoBootstrap\Tab\View\Tab\NavigationIterator;
 
 /**
  * Class TabSeparatorElement
  */
-class TabStartElement extends ContentElement
+class TabStartElement extends AbstractTabElement
 {
     /**
      * Template name.
@@ -34,6 +35,16 @@ class TabStartElement extends ContentElement
      */
     protected function compile()
     {
-        // TODO: Implement compile() method.
+        $this->Template->navigation  = $this->getTabRegistry()->getNavigation((string) $this->id);
+        $this->Template->currentItem = $this->getIterator()->current();
+    }
+
+    protected function getIterator(): ?NavigationIterator
+    {
+        try {
+            return $this->getTabRegistry()->getIterator((string) $this->id);
+        } catch (AssertionFailedException $e) {
+            return null;
+        }
     }
 }
