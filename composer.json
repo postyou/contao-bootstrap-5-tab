@@ -19,12 +19,13 @@
         "source":"https://github.com/contao-bootstrap/tab"
     },
     "require":{
-        "php":">=5.3.4",
+        "php":"^7.1",
         "contao/core-bundle":"^4.4",
         "contao-bootstrap/core": "~2.0",
         "netzmacht/html": "~2.0",
         "contao-community-alliance/meta-palettes":"~2.0",
-        "menatwork/contao-multicolumnwizard":"~3.2"
+        "menatwork/contao-multicolumnwizard":"~3.2",
+        "beberlei/assert": "^2.9"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",

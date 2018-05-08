@@ -1,0 +1,2 @@
+<div class="tab-content">
+    <div class="tab-pane" id="<?= $this->tab->id ?>" role="tabpanel" aria-labelledby="<?= $this->tab->navId ?>">
