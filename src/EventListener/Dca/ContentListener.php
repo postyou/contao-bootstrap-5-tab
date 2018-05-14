@@ -77,22 +77,19 @@ final class ContentListener
     /**
      * Get all tab parent options.
      *
-     * @param DataContainer|null $dataContainer Data container driver.
-     *
      * @return array
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function getTabParentOptions($dataContainer = null): array
+    public function getTabParentOptions(): array
     {
         $columns[] = 'tl_content.type = ?';
-        $values[]  = 'bs_tab_start';
+        $columns[] = 'tl_content.pid = ?';
+        $columns[] = 'tl_content.ptable = ?';
 
-        if ($dataContainer) {
-            $columns[] = 'tl_content.pid = ?';
-            $columns[] = 'tl_content.ptable = ?';
-
-            $values[] = $dataContainer->activeRecord->pid;
-            $values[] = $dataContainer->activeRecord->ptable;
-        }
+        $values[] = 'bs_tab_start';
+        $values[] = CURRENT_ID;
+        $values[] = $GLOBALS['TL_DCA']['tl_content']['config']['ptable'];
 
         $collection = $this->repository->findBy($columns, $values);
         $options    = [];
