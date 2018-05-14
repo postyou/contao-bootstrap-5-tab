@@ -74,6 +74,16 @@ final class NavigationIterator implements \Iterator
     }
 
     /**
+     * Get the tab navigation.
+     *
+     * @return Navigation
+     */
+    public function navigation(): Navigation
+    {
+        return $this->navigation;
+    }
+
+    /**
      * Get the current item.
      *
      * @return NavItem|null
