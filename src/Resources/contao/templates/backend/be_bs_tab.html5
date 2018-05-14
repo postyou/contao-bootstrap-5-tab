@@ -2,6 +2,7 @@
 <span class="tl_gerror"><?= $this->error ?></span>
 <?php else: ?>
 <span class="tl_gray">
-    <span<?php if ($this->color): ?> style="color: <?= $this->color; ?>"<?php endif; ?>><?= implode(' / ', $this->name) ?></span>
+    <span<?php if ($this->color): ?> style="color: <?= $this->color; ?>"<?php endif ?>><?= $this->name ?><?php if ($this->title): ?>: <?php endif ?></span>
+    <?= implode(' &raquo; ', $this->title) ?>
 </span>
 <?php endif; ?>

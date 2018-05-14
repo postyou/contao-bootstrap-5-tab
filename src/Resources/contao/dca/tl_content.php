@@ -12,7 +12,7 @@
  */
 
 $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bs_tab_start'] = [
-    'type'      => ['type', 'name'],
+    'type'      => ['headline', 'type', 'bs_tab_name'],
     'config'    => ['bs_tabs', 'bs_tab_nav_position', 'bs_tab_fade'],
     'template'  => [':hide', 'customTpl'],
     'protected' => [':hide', 'protected'],
@@ -54,6 +54,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_parent'] = [
         'tl_class'           => 'w50',
     ],
     'sql'              => "int(10) unsigned NOT NULL default '0'",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_name'] = [
+    'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tab_name'],
+    'exclude'   => true,
+    'inputType' => 'text',
+    'eval'      => ['tl_class' => 'clr w50', 'mandatory' => true, 'maxlength' => 64],
+    'sql'       => "varchar(64) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tabs'] = [

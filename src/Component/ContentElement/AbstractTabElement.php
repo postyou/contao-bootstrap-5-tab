@@ -33,7 +33,7 @@ abstract class AbstractTabElement extends ContentElement
         if ($this->isBackendRequest()) {
             $iterator = $this->getIterator();
 
-            if ($iterator) {
+            if ($iterator && $this->getParent() !== $this->getModel()) {
                 $iterator->next();
             }
 
@@ -56,7 +56,7 @@ abstract class AbstractTabElement extends ContentElement
     /**
      * Render the backend view.
      *
-     * @param Model|null   $start    Start element.
+     * @param ContentModel|null   $start    Start element.
      * @param NavigationIterator $iterator Iterator.
      *
      * @return string
@@ -67,6 +67,11 @@ abstract class AbstractTabElement extends ContentElement
     {
         $template = new BackendTemplate('be_bs_tab');
 
+        $parent = $this->getParent();
+        if ($parent) {
+            $template->name = $parent->bs_tab_name;
+        }
+
         if ($start) {
             $colorRotate = static::getContainer()->get('contao_bootstrap.core.helper.color_rotate');
 
@@ -74,11 +79,11 @@ abstract class AbstractTabElement extends ContentElement
         }
 
         if (!$start) {
-            $template->error = $GLOBALS['TL_LANG']['ERR']['bsGridParentMissing'];
+            $template->error = $GLOBALS['TL_LANG']['ERR']['bsTabParentMissing'];
         }
 
         if ($iterator) {
-            $template->name = $iterator->currentTitle();
+            $template->title = $iterator->currentTitle();
         }
 
         return $template->parse();
