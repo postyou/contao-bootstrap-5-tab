@@ -35,10 +35,6 @@
     "suggest": {
         "contao-bootstrap/grid": "Use grid component for horizontal aligned tab navigation."
     },
-    "conflict": {
-        "netzmacht/contao-bootstrap": "*",
-        "contao-bootstrap/components": "*"
-    },
     "autoload": {
         "psr-4": { "ContaoBootstrap\\Tab\\": "src/" }
     },
