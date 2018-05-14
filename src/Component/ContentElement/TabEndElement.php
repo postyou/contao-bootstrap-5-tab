@@ -32,11 +32,13 @@ class TabEndElement extends AbstractTabElement
      */
     protected function compile()
     {
-        $this->Template->navigation     = $this->getIterator()->navigation();
-        $this->Template->grid           = $this->getGridIterator();
+        $this->Template->grid = $this->getGridIterator();
 
-        $parent = $this->getParent();
-        if ($parent) {
+        if ($iterator = $this->getIterator()) {
+            $this->Template->navigation = $iterator->navigation();
+        }
+
+        if ($parent = $this->getParent()) {
             $this->Template->showNavigation = $parent->bs_tab_nav_position === 'after';
             $this->Template->navClass       = $parent->bs_tab_nav_class;
         }

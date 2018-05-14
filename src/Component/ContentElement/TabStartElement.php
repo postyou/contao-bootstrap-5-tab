@@ -72,18 +72,6 @@ class TabStartElement extends AbstractTabElement
     }
 
     /**
-     * @return NavigationIterator|null
-     */
-    protected function getIterator(): ?NavigationIterator
-    {
-        try {
-            return $this->getTabRegistry()->getIterator((string) $this->id);
-        } catch (AssertionFailedException $e) {
-            return null;
-        }
-    }
-
-    /**
      * {@inheritdoc}
      */
     protected function getParent(): ?ContentModel
