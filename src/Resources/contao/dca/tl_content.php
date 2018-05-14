@@ -64,12 +64,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tabs'] = [
         'tl_class'       => 'clr',
         'submitOnChange' => true,
         'columnFields'   => [
-            'title' => [
-                'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_title'],
-                'exclude'   => true,
-                'inputType' => 'text',
-                'eval'      => [],
-            ],
             'type'  => [
                 'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_type'],
                 'exclude'   => true,
@@ -77,6 +71,18 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tabs'] = [
                 'options'   => ['dropdown', 'child'],
                 'reference' => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_type'],
                 'eval'      => ['includeBlankOption' => true, 'style' => 'width: 140px;', 'chosen' => true],
+            ],
+            'title' => [
+                'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_title'],
+                'exclude'   => true,
+                'inputType' => 'text',
+                'eval'      => [],
+            ],
+            'cssId' => [
+                'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_cssId'],
+                'exclude'   => true,
+                'inputType' => 'text',
+                'eval'      => [],
             ],
             'active' => [
                 'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_active'],
