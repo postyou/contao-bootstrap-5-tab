@@ -105,10 +105,10 @@ final class NavigationIterator implements \Iterator
         $this->currentItem = next($this->items) ?: null;
 
         if ($this->currentItem instanceof Dropdown) {
-            $this->dropdownItems = $this->currentItem->items();
+            $this->dropdownItems       = $this->currentItem->items();
             $this->currentDropdownItem = current($this->dropdownItems);
         } else {
-            $this->dropdownItems = [];
+            $this->dropdownItems       = [];
             $this->currentDropdownItem = null;
         }
     }

@@ -57,9 +57,10 @@ final class Navigation implements ItemList
             }
 
             if ($tab['type'] === 'dropdown') {
-                $item = Dropdown::fromArray($tab);
-                $current->addItem($item);
+                $item    = Dropdown::fromArray($tab);
                 $current = $item;
+
+                $navigation->addItem($item);
             } else {
                 if ($tab['type'] !== 'child') {
                     $current = $navigation;
