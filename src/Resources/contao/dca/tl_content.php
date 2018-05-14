@@ -8,12 +8,20 @@
  */
 
 /*
+ * Config
+ */
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = [
+    'contao_bootstrap.tab.listener.dca.content',
+    'registerGridLoadCallback'
+];
+
+/*
  * Palettes
  */
 
 $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bs_tab_start'] = [
     'type'      => ['headline', 'type', 'bs_tab_name'],
-    'config'    => ['bs_tabs', 'bs_tab_nav_position', 'bs_tab_fade'],
+    'config'    => ['bs_tabs', 'bs_tab_nav_position', 'bs_tab_fade', 'bs_grid'],
     'template'  => [':hide', 'customTpl'],
     'protected' => [':hide', 'protected'],
     'expert'    => [':hide', 'guests', 'cssID', 'bs_tab_content_class'],

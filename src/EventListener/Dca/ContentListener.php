@@ -25,7 +25,7 @@ use Contao\DataContainer;
  *
  * @package ContaoBootstrap\Tab\EventListener\Dca
  */
-class ContentListener
+final class ContentListener
 {
     /**
      * Contao framework.
@@ -44,7 +44,7 @@ class ContentListener
     /**
      * ContentDataContainer constructor.
      *
-     * @param ContaoFramework $framework   Contao framework.
+     * @param ContaoFramework $framework Contao framework.
      */
     public function __construct(ContaoFramework $framework)
     {
@@ -53,12 +53,29 @@ class ContentListener
     }
 
     /**
+     * Register the load callback for the grid field if it exist.
+     *
+     * @return void
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    public function registerGridLoadCallback(): void
+    {
+        if (isset($GLOBALS['TL_DCA']['tl_content']['fields']['bs_grid'])) {
+            $GLOBALS['TL_DCA']['tl_content']['fields']['bs_grid']['load_callback'][] = [
+                'contao_bootstrap.tab.listener.dca.content',
+                'configureGridField'
+            ];
+        }
+    }
+
+    /**
      * @param DataContainer|null $dataContainer
      *
      * @return array
      * @throws \Exception
      */
-    public function getTabParentOptions($dataContainer = null)
+    public function getTabParentOptions($dataContainer = null): array
     {
         $columns[] = 'tl_content.type = ?';
         $values[]  = 'bs_tab_start';
@@ -85,5 +102,22 @@ class ContentListener
         }
 
         return $options;
+    }
+
+    /**
+     * @param $value
+     * @param $dataContainer
+     *
+     * @return mixed
+     *
+     * @SuppressWarnings(PHPMD.Superglobals)
+     */
+    public function configureGridField($value, $dataContainer)
+    {
+        if ($dataContainer->activeRecord->type === 'bs_tab_start') {
+            $GLOBALS['TL_DCA']['tl_content']['fields']['bs_grid']['eval']['mandatory'] = false;
+        }
+
+        return $value;
     }
 }

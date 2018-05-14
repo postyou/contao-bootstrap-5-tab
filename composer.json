@@ -29,7 +29,11 @@
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",
-        "phpcq/all-tasks": "^1.2"
+        "phpcq/all-tasks": "^1.2",
+        "contao-bootstrap/grid": "^2.0"
+    },
+    "suggest": {
+        "contao-bootstrap/grid": "Use grid component for horizontal aligned tab navigation."
     },
     "conflict": {
         "netzmacht/contao-bootstrap": "*",

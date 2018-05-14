@@ -36,5 +36,6 @@ class TabEndElement extends AbstractTabElement
 
         $this->Template->showNavigation = ($parent && $parent->bs_tab_nav_position === 'after');
         $this->Template->navigation     = $this->getIterator()->navigation();
+        $this->Template->grid           = $this->getGridIterator();
     }
 }

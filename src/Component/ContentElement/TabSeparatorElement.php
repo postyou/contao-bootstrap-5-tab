@@ -33,16 +33,22 @@ class TabSeparatorElement extends AbstractTabElement
     protected function compile()
     {
         $iterator = $this->getIterator();
+        $parent   = $this->getParent();
+
+        $this->Template->fade = ($parent && $parent->bs_tab_fade) ? ' fade': '';
 
         if ($iterator) {
             $iterator->next();
 
             if ($iterator->valid()) {
-                $this->Template->currentItem = $iterator->current();
+                $currentItem = $iterator->current();
+
+                $this->Template->currentItem = $currentItem;
+
+                if ($parent->bs_tab_fade && $currentItem && $currentItem->active()) {
+                    $this->Template->fade .= ' show';
+                }
             }
         }
-
-        $parent               = $this->getParent();
-        $this->Template->fade = ($parent && $parent->bs_tab_fade) ? ' fade': '';
     }
 }

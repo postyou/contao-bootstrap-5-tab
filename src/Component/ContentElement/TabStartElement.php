@@ -36,16 +36,22 @@ class TabStartElement extends AbstractTabElement
      */
     protected function compile()
     {
-        $iterator = $this->getIterator();
+        $this->Template->fade = $this->bs_tab_fade ? ' fade': '';
+        $this->Template->grid = $this->getGridIterator();
 
+        $iterator = $this->getIterator();
         if ($iterator) {
             $iterator->rewind();
 
-            $this->Template->navigation  = $iterator->navigation();
-            $this->Template->currentItem = $iterator->current();
-        }
+            $currentItem = $iterator->current();
 
-        $this->Template->fade = $this->bs_tab_fade ? ' fade': '';
+            $this->Template->navigation  = $iterator->navigation();
+            $this->Template->currentItem = $currentItem;
+
+            if ($this->bs_tab_fade && $currentItem && $currentItem->active()) {
+                $this->Template->fade .= ' show';
+            }
+        }
     }
 
     /**

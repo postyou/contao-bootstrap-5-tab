@@ -20,6 +20,7 @@ use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use ContaoBootstrap\Core\ContaoBootstrapCoreBundle;
+use ContaoBootstrap\Grid\ContaoBootstrapGridBundle;
 use ContaoBootstrap\Tab\ContaoBootstrapTabBundle;
 
 /**
@@ -32,9 +33,15 @@ final class Plugin implements BundlePluginInterface
      */
     public function getBundles(ParserInterface $parser)
     {
+        $loadAfter = [ContaoCoreBundle::class, ContaoBootstrapCoreBundle::class];
+
+        if (class_exists(ContaoBootstrapGridBundle::class)) {
+            $loadAfter[] = ContaoBootstrapGridBundle::class;
+        }
+
         return [
             BundleConfig::create(ContaoBootstrapTabBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class, ContaoBootstrapCoreBundle::class])
+                ->setLoadAfter($loadAfter)
         ];
     }
 }

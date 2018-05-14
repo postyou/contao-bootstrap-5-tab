@@ -15,14 +15,17 @@ declare(strict_types=1);
 
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
-
 use Assert\AssertionFailedException;
 use Contao\BackendTemplate;
 use Contao\ContentElement;
 use Contao\ContentModel;
+use ContaoBootstrap\Grid\GridIterator;
 use ContaoBootstrap\Tab\View\Tab\NavigationIterator;
 use ContaoBootstrap\Tab\View\Tab\TabRegistry;
 
+/**
+ * Class AbstractTabElement
+ */
 abstract class AbstractTabElement extends ContentElement
 {
     /**
@@ -122,5 +125,28 @@ abstract class AbstractTabElement extends ContentElement
     protected function getParent():? ContentModel
     {
         return ContentModel::findByPk($this->bs_tab_parent);
+    }
+
+    /**
+     * @return GridIterator|null
+     */
+    protected function getGridIterator(): ?GridIterator
+    {
+        $parent = $this->getParent();
+        $bundles = static::getContainer()->getParameter('kernel.bundles');
+
+        if (!$parent || !isset($bundles['ContaoBootstrapGridBundle']) || !$parent->bs_grid) {
+            return null;
+        }
+
+        $provider = $this->getContainer()->get('contao_bootstrap.grid.grid_provider');
+
+        try {
+            $gridIterator =  $provider->getIterator('ce:' . $parent->id, (int) $parent->bs_grid);
+
+            return $gridIterator;
+        } catch (\RuntimeException $e) {
+            return null;
+        }
     }
 }
