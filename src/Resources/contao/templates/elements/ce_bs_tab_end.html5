@@ -1,3 +1,7 @@
         </div>
     </div>
+
+    <?php if ($this->showNavigation): ?>
+        <?= $this->insert('bs_tab_nav', $this->getData()) ?>
+    <?php endif ?>
 </div>

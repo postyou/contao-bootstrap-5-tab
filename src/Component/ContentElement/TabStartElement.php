@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
 use Assert\AssertionFailedException;
+use Contao\ContentModel;
 use ContaoBootstrap\Tab\View\Tab\NavigationIterator;
 
 /**
@@ -35,8 +36,16 @@ class TabStartElement extends AbstractTabElement
      */
     protected function compile()
     {
-        $this->Template->navigation  = $this->getTabRegistry()->getNavigation((string) $this->id);
-        $this->Template->currentItem = $this->getIterator()->current();
+        $iterator = $this->getIterator();
+
+        if ($iterator) {
+            $iterator->rewind();
+
+            $this->Template->navigation  = $iterator->navigation();
+            $this->Template->currentItem = $iterator->current();
+        }
+
+        $this->Template->fade = $this->bs_tab_fade ? ' fade': '';
     }
 
     /**
@@ -50,13 +59,14 @@ class TabStartElement extends AbstractTabElement
             if ($iterator) {
                 $iterator->rewind();
             }
-
-            return $this->renderBackendView($this->getModel(), $iterator);
         }
 
         return parent::generate();
     }
 
+    /**
+     * @return NavigationIterator|null
+     */
     protected function getIterator(): ?NavigationIterator
     {
         try {
@@ -64,5 +74,13 @@ class TabStartElement extends AbstractTabElement
         } catch (AssertionFailedException $e) {
             return null;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getParent(): ?ContentModel
+    {
+        return $this->getModel();
     }
 }

@@ -15,12 +15,10 @@ declare(strict_types=1);
 
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
-use Contao\ContentElement;
-
 /**
  * Class TabSeparatorElement
  */
-class TabEndElement extends ContentElement
+class TabEndElement extends AbstractTabElement
 {
     /**
      * Template name.
@@ -34,6 +32,9 @@ class TabEndElement extends ContentElement
      */
     protected function compile()
     {
-        // TODO: Implement compile() method.
+        $parent = $this->getParent();
+
+        $this->Template->showNavigation = ($parent && $parent->bs_tab_nav_position === 'after');
+        $this->Template->navigation     = $this->getIterator()->navigation();
     }
 }

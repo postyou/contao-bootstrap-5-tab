@@ -12,11 +12,11 @@
  */
 
 $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bs_tab_start'] = [
-    'type'      => ['type', 'name', 'bs_tab_name'],
-    'config'    => ['bs_tabs'],
+    'type'      => ['type', 'name'],
+    'config'    => ['bs_tabs', 'bs_tab_nav_position', 'bs_tab_fade'],
     'template'  => [':hide', 'customTpl'],
     'protected' => [':hide', 'protected'],
-    'expert'    => [':hide', 'guests', 'cssID'],
+    'expert'    => [':hide', 'guests', 'cssID', 'bs_tab_content_class'],
     'invisible' => ['invisible', 'start', 'stop'],
 ];
 
@@ -95,10 +95,27 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tabs'] = [
     'sql'       => "blob NULL",
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['bootstrap_fade'] = [
-    'label'     => &$GLOBALS['TL_LANG']['tl_content']['bootstrap_fade'],
+$GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_nav_position'] = [
+    'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tab_nav_position'],
+    'exclude'   => true,
+    'inputType' => 'select',
+    'eval'      => ['tl_class' => 'w50'],
+    'options'   => ['before', 'after'],
+    'sql'       => "varchar(12) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_fade'] = [
+    'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tab_fade'],
     'exclude'   => true,
     'inputType' => 'checkbox',
-    'eval'      => ['tl_class' => 'w50'],
+    'eval'      => ['tl_class' => 'w50 m12'],
     'sql'       => "char(1) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_content_class'] = [
+    'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tab_content_class'],
+    'exclude'   => true,
+    'inputType' => 'text',
+    'eval'      => ['tl_class' => 'w50', 'maxlength' => 64],
+    'sql'       => "varchar(64) NOT NULL default ''",
 ];

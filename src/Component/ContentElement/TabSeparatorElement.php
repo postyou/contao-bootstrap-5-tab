@@ -15,9 +15,6 @@ declare(strict_types=1);
 
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
-use Assert\AssertionFailedException;
-use ContaoBootstrap\Tab\View\Tab\NavigationIterator;
-
 /**
  * Class TabSeparatorElement
  */
@@ -44,19 +41,8 @@ class TabSeparatorElement extends AbstractTabElement
                 $this->Template->currentItem = $iterator->current();
             }
         }
-    }
 
-    /**
-     * @return NavigationIterator
-     *
-     * @throws \Assert\AssertionFailedException
-     */
-    protected function getIterator(): ?NavigationIterator
-    {
-        try {
-            return $this->getTabRegistry()->getIterator((string) $this->bs_tab_parent);
-        } catch (AssertionFailedException $e) {
-            return null;
-        }
+        $parent               = $this->getParent();
+        $this->Template->fade = ($parent && $parent->bs_tab_fade) ? ' fade': '';
     }
 }

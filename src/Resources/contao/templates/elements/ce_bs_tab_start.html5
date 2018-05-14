@@ -6,6 +6,9 @@
 <?php endif; ?>
 <?php $this->endblock(); ?>
 
+<?php if ($this->bs_tab_nav_position !== 'after'): ?>
 <?= $this->insert('bs_tab_nav', $this->getData()) ?>
-<div class="tab-content">
-    <div class="tab-pane<?php if ($this->currentItem->active()): ?> active<?php endif ?>" id="<?= $this->currentItem->cssId() ?>" role="tabpanel" aria-labelledby="<?= $this->currentItem->navCssId() ?>">
+<?php endif ?>
+
+<div class="tab-content<?php if ($this->bs_tab_content_class): ?> <?= $this->bs_tab_content_class ?><?php endif; ?>">
+    <div class="tab-pane<?= $this->fade ?><?php if ($this->currentItem->active()): ?> active<?php endif ?>" id="<?= $this->currentItem->cssId() ?>" role="tabpanel" aria-labelledby="<?= $this->currentItem->navCssId() ?>">

@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
 
+use Assert\AssertionFailedException;
 use Contao\BackendTemplate;
 use Contao\ContentElement;
 use Contao\ContentModel;
@@ -97,10 +98,16 @@ abstract class AbstractTabElement extends ContentElement
     }
 
     /**
-     * @return NavigationIterator|null
+     * @return NavigationIterator
      */
-    abstract protected function getIterator(): ?NavigationIterator;
-
+    protected function getIterator(): ?NavigationIterator
+    {
+        try {
+            return $this->getTabRegistry()->getIterator((string) $this->bs_tab_parent);
+        } catch (AssertionFailedException $e) {
+            return null;
+        }
+    }
 
     /**
      * Get the parent model.
