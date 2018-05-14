@@ -35,7 +35,7 @@ class TabSeparatorElement extends AbstractTabElement
         $iterator = $this->getIterator();
         $parent   = $this->getParent();
 
-        $this->Template->fade = ($parent && $parent->bs_tab_fade) ? ' fade': '';
+        $this->Template->fade = ($parent && $parent->bs_tab_fade) ? ' fade' : '';
 
         if ($iterator) {
             $iterator->next();

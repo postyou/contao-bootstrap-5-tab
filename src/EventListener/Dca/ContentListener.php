@@ -73,10 +73,11 @@ final class ContentListener
     }
 
     /**
-     * @param DataContainer|null $dataContainer
+     * Get all tab parent options.
+     *
+     * @param DataContainer|null $dataContainer Data container driver.
      *
      * @return array
-     * @throws \Exception
      */
     public function getTabParentOptions($dataContainer = null): array
     {
@@ -108,8 +109,10 @@ final class ContentListener
     }
 
     /**
-     * @param $value
-     * @param $dataContainer
+     * Configure the grid field.
+     *
+     * @param mixed              $value         The field value.
+     * @param DataContainer|null $dataContainer The data container driver.
      *
      * @return mixed
      *
@@ -153,7 +156,10 @@ final class ContentListener
     }
 
     /**
-     * @param $definition
+     * Count the required separator fields which should be created.
+     *
+     * @param mixed        $definition The tab definitions.
+     * @param ContentModel $current    The current content model.
      *
      * @return int
      */

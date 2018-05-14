@@ -59,7 +59,7 @@ abstract class AbstractTabElement extends ContentElement
     /**
      * Render the backend view.
      *
-     * @param ContentModel|null   $start    Start element.
+     * @param ContentModel|null  $start    Start element.
      * @param NavigationIterator $iterator Iterator.
      *
      * @return string
@@ -106,6 +106,8 @@ abstract class AbstractTabElement extends ContentElement
     }
 
     /**
+     * Get the tab navigation iterator.
+     *
      * @return NavigationIterator
      */
     protected function getIterator(): ?NavigationIterator
@@ -134,11 +136,13 @@ abstract class AbstractTabElement extends ContentElement
     }
 
     /**
+     * Get the grid iterator.
+     *
      * @return GridIterator|null
      */
     protected function getGridIterator(): ?GridIterator
     {
-        $parent = $this->getParent();
+        $parent  = $this->getParent();
         $bundles = static::getContainer()->getParameter('kernel.bundles');
 
         if (!$parent || !isset($bundles['ContaoBootstrapGridBundle']) || !$parent->bs_grid) {
@@ -148,7 +152,7 @@ abstract class AbstractTabElement extends ContentElement
         $provider = $this->getContainer()->get('contao_bootstrap.grid.grid_provider');
 
         try {
-            $gridIterator =  $provider->getIterator('ce:' . $parent->id, (int) $parent->bs_grid);
+            $gridIterator = $provider->getIterator('ce:' . $parent->id, (int) $parent->bs_grid);
 
             return $gridIterator;
         } catch (\RuntimeException $e) {

@@ -53,10 +53,10 @@ class NavItem
     /**
      * Item constructor.
      *
-     * @param string      $title
-     * @param bool        $active
-     * @param string      $cssId
-     * @param string|null $navCssId
+     * @param string      $title    Title of the nav item.
+     * @param bool        $active   Active state.
+     * @param string|null $cssId    Css id.
+     * @param string|null $navCssId Nav css id.
      */
     public function __construct(string $title, bool $active = false, string $cssId = null, string $navCssId = null)
     {
@@ -67,7 +67,9 @@ class NavItem
     }
 
     /**
-     * @param array $definition
+     * Create nav item from an array definition.
+     *
+     * @param array $definition The array definition.
      *
      * @return NavItem
      */

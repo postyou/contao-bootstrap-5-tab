@@ -18,7 +18,6 @@ use ContaoBootstrap\Tab\Component\ContentElement\TabSeparatorElement;
 use ContaoBootstrap\Tab\Component\ContentElement\TabStartElement;
 
 // Content elements
-
 $GLOBALS['TL_CTE']['bootstrap_tabs']['bs_tab_start']     = TabStartElement::class;
 $GLOBALS['TL_CTE']['bootstrap_tabs']['bs_tab_separator'] = TabSeparatorElement::class;
 $GLOBALS['TL_CTE']['bootstrap_tabs']['bs_tab_end']       = TabEndElement::class;

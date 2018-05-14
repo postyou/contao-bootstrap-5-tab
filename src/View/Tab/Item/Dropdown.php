@@ -20,9 +20,11 @@ use ContaoBootstrap\Tab\View\Tab\ItemList;
 /**
  * Class Dropdown
  */
-class Dropdown extends NavItem implements ItemList
+final class Dropdown extends NavItem implements ItemList
 {
     /**
+     * Dropdown items.
+     *
      * @var array|NavItem[]
      */
     private $items = [];

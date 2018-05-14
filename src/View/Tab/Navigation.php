@@ -48,7 +48,7 @@ final class Navigation implements ItemList
 
         foreach ($definition as $index => $tab) {
             if (!$tab['cssId']) {
-                $tab['cssId'] = StringUtil::standardize($tab['title']);
+                $tab['cssId']  = StringUtil::standardize($tab['title']);
                 $tab['cssId'] .= '-' . $tabId;
 
                 if (in_array($tab['cssId'], $cssIds)) {

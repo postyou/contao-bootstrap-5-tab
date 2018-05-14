@@ -1,15 +1,20 @@
 <?php
 
 /**
- * @package   contao-bootstrap
- * @author    David Molineus <david.molineus@netzmacht.de>
- * @license   LGPL 3+
- * @copyright 2013-2015 netzmacht creative David Molineus
+ * Contao Bootstrap
+ *
+ * @package    contao-bootstrap
+ * @subpackage Tab
+ * @author     David Molineus <david.molineus@netzmacht.de>
+ * @copyright  2013-2018 netzmacht David Molineus. All rights reserved.
+ * @license    LGPL-3.0 https://github.com/contao-bootstrap/tab
+ * @filesource
  */
 
 /*
  * Config
  */
+
 $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = [
     'contao_bootstrap.tab.listener.dca.content',
     'registerGridLoadCallback'
@@ -41,7 +46,7 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bs_tab_separator'] = [
     'invisible' => ['invisible', 'start', 'stop'],
 ];
 
-$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bs_tab_end']   = [
+$GLOBALS['TL_DCA']['tl_content']['metapalettes']['bs_tab_end'] = [
     'type'      => ['type', 'name', 'bs_tab_parent'],
     'template'  => [':hide', 'customTpl'],
     'protected' => [':hide', 'protected'],
@@ -113,7 +118,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tabs'] = [
             ],
         ],
     ],
-    'sql'       => "blob NULL",
+    'sql'       => 'blob NULL',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_nav_position'] = [
