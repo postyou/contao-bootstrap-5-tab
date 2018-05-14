@@ -56,14 +56,16 @@ final class ContentListener
     }
 
     /**
-     * Register the load callback for the grid field if it exist.
+     * Initialize the dca.
      *
      * @return void
      *
      * @SuppressWarnings(PHPMD.Superglobals)
      */
-    public function registerGridLoadCallback(): void
+    public function initializeDca(): void
     {
+        $GLOBALS['TL_CSS'][] = 'bundles/contaobootstraptab/css/backend.css';
+
         if (isset($GLOBALS['TL_DCA']['tl_content']['fields']['bs_grid'])) {
             $GLOBALS['TL_DCA']['tl_content']['fields']['bs_grid']['load_callback'][] = [
                 'contao_bootstrap.tab.listener.dca.content',

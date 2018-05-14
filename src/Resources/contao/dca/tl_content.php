@@ -17,12 +17,12 @@
 
 $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = [
     'contao_bootstrap.tab.listener.dca.content',
-    'registerGridLoadCallback'
+    'initializeDca',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = [
     'contao_bootstrap.tab.listener.dca.content',
-    'generateColumns'
+    'generateColumns',
 ];
 
 /*
@@ -87,10 +87,10 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tabs'] = [
     'exclude'   => true,
     'inputType' => 'multiColumnWizard',
     'eval'      => [
-        'tl_class'       => 'clr',
+        'tl_class'       => 'clr lng bs-tabs',
         'submitOnChange' => true,
         'columnFields'   => [
-            'type'  => [
+            'type'   => [
                 'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_type'],
                 'exclude'   => true,
                 'inputType' => 'select',
@@ -98,13 +98,13 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tabs'] = [
                 'reference' => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_type'],
                 'eval'      => ['includeBlankOption' => true, 'style' => 'width: 140px;', 'chosen' => true],
             ],
-            'title' => [
+            'title'  => [
                 'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_title'],
                 'exclude'   => true,
                 'inputType' => 'text',
                 'eval'      => ['mandatory' => true],
             ],
-            'cssId' => [
+            'cssId'  => [
                 'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_cssId'],
                 'exclude'   => true,
                 'inputType' => 'text',
@@ -142,7 +142,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_content_class'] = [
     'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tab_content_class'],
     'exclude'   => true,
     'inputType' => 'text',
-    'eval'      => ['tl_class' => 'w50', 'maxlength' => 64],
+    'eval'      => ['tl_class' => 'clr w50', 'maxlength' => 64],
     'sql'       => "varchar(64) NOT NULL default ''",
 ];
 
