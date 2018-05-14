@@ -36,8 +36,9 @@ class TabStartElement extends AbstractTabElement
      */
     protected function compile()
     {
-        $this->Template->fade = $this->bs_tab_fade ? ' fade': '';
-        $this->Template->grid = $this->getGridIterator();
+        $this->Template->fade     = $this->bs_tab_fade ? ' fade' : '';
+        $this->Template->grid     = $this->getGridIterator();
+        $this->Template->navClass = $this->bs_tab_nav_class;
 
         $iterator = $this->getIterator();
         if ($iterator) {

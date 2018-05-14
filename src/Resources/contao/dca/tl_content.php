@@ -24,7 +24,7 @@ $GLOBALS['TL_DCA']['tl_content']['metapalettes']['bs_tab_start'] = [
     'config'    => ['bs_tabs', 'bs_tab_nav_position', 'bs_tab_fade', 'bs_grid'],
     'template'  => [':hide', 'customTpl'],
     'protected' => [':hide', 'protected'],
-    'expert'    => [':hide', 'guests', 'cssID', 'bs_tab_content_class'],
+    'expert'    => [':hide', 'guests', 'cssID', 'bs_tab_content_class', 'bs_tab_nav_class'],
     'invisible' => ['invisible', 'start', 'stop'],
 ];
 
@@ -92,7 +92,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tabs'] = [
                 'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_title'],
                 'exclude'   => true,
                 'inputType' => 'text',
-                'eval'      => [],
+                'eval'      => ['mandatory' => true],
             ],
             'cssId' => [
                 'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tabs_cssId'],
@@ -130,6 +130,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_fade'] = [
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_content_class'] = [
     'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tab_content_class'],
+    'exclude'   => true,
+    'inputType' => 'text',
+    'eval'      => ['tl_class' => 'w50', 'maxlength' => 64],
+    'sql'       => "varchar(64) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_nav_class'] = [
+    'label'     => &$GLOBALS['TL_LANG']['tl_content']['bs_tab_nav_class'],
     'exclude'   => true,
     'inputType' => 'text',
     'eval'      => ['tl_class' => 'w50', 'maxlength' => 64],

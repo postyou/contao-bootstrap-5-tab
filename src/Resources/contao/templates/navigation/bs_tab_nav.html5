@@ -1,4 +1,4 @@
-<ul class="nav <?= $this->tabNavClass ?: 'nav-tabs' ?>" role="tablist">
+<ul class="nav <?= $this->navClass ?: 'nav-tabs' ?>" role="tablist">
     <?php foreach($this->navigation->items() as $item): ?>
     <?php if ($item instanceof \ContaoBootstrap\Tab\View\Tab\Item\Dropdown): ?>
     <li class="nav-item dropdown">
