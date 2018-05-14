@@ -1,3 +1,11 @@
+<div class="<?= $this->class ?> block"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
+
+<?php $this->block('headline'); ?>
+<?php if ($this->headline): ?>
+<<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
+<?php endif; ?>
+<?php $this->endblock(); ?>
+
 <?= $this->insert('bs_tab_nav', $this->getData()) ?>
 <div class="tab-content">
     <div class="tab-pane<?php if ($this->currentItem->active()): ?> active<?php endif ?>" id="<?= $this->currentItem->cssId() ?>" role="tabpanel" aria-labelledby="<?= $this->currentItem->navCssId() ?>">
