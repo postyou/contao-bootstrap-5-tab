@@ -15,6 +15,11 @@ $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = [
     'registerGridLoadCallback'
 ];
 
+$GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = [
+    'contao_bootstrap.tab.listener.dca.content',
+    'generateColumns'
+];
+
 /*
  * Palettes
  */
