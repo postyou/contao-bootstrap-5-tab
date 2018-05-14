@@ -13,6 +13,8 @@
 
 $GLOBALS['TL_LANG']['tl_content']['bs_tab_name'][0]           = 'Tab name';
 $GLOBALS['TL_LANG']['tl_content']['bs_tab_name'][1]           = 'Tab name is used to identify start element in the backend.';
+$GLOBALS['TL_LANG']['tl_content']['bs_tab_parent'][0]         = 'Tab start element';
+$GLOBALS['TL_LANG']['tl_content']['bs_tab_parent'][1]         = 'Parent tab start element.';
 $GLOBALS['TL_LANG']['tl_content']['bs_tabs'][0]               = 'Tabs';
 $GLOBALS['TL_LANG']['tl_content']['bs_tabs'][1]               = 'Define each tab label. Dropdown menus can be set too.';
 $GLOBALS['TL_LANG']['tl_content']['bs_tabs_title'][0]         = 'Title';
