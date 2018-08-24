@@ -16,22 +16,96 @@ declare(strict_types=1);
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
 use Assert\AssertionFailedException;
-use Contao\BackendTemplate;
-use Contao\ContentElement;
 use Contao\ContentModel;
+use Contao\Database\Result;
+use Contao\Model;
+use Contao\Model\Collection;
+use ContaoBootstrap\Core\Helper\ColorRotate;
 use ContaoBootstrap\Grid\GridIterator;
+use ContaoBootstrap\Grid\GridProvider;
 use ContaoBootstrap\Tab\View\Tab\NavigationIterator;
 use ContaoBootstrap\Tab\View\Tab\TabRegistry;
+use Netzmacht\Contao\Toolkit\Component\ContentElement\AbstractContentElement;
+use Netzmacht\Contao\Toolkit\Routing\RequestScopeMatcher;
+use Netzmacht\Contao\Toolkit\View\Template\TemplateReference as ToolkitTemplateReference;
+use Symfony\Component\Templating\EngineInterface as TemplateEngine;
+use Symfony\Component\Translation\TranslatorInterface as Translator;
 
 /**
  * Class AbstractTabElement
  */
-abstract class AbstractTabElement extends ContentElement
+abstract class AbstractTabElement extends AbstractContentElement
 {
+    /**
+     * Color rotate.
+     *
+     * @var ColorRotate
+     */
+    private $colorRotate;
+
+    /**
+     * Request scope matcher.
+     *
+     * @var RequestScopeMatcher
+     */
+    private $scopeMatcher;
+
+    /**
+     * Tab registry.
+     *
+     * @var TabRegistry
+     */
+    private $tabRegistry;
+
+    /**
+     * Grid provider.
+     *
+     * @var GridProvider|null
+     */
+    private $gridProvider;
+
+    /**
+     * The translator.
+     *
+     * @var Translator
+     */
+    private $translator;
+
+    /**
+     * AbstractContentElement constructor.
+     *
+     * @param Model|Collection|Result $model          Object model or result.
+     * @param TemplateEngine          $templateEngine Template engine.
+     * @param Translator              $translator     The translator.
+     * @param ColorRotate             $colorRotate    ColorRotate helper.
+     * @param RequestScopeMatcher     $scopeMatcher   Request scope matcher.
+     * @param TabRegistry             $tabRegistry    Tab registry.
+     * @param GridProvider|null       $gridProvider   Grid provider.
+     * @param string                  $column         Column or section name.
+     */
+    public function __construct(
+        $model,
+        TemplateEngine $templateEngine,
+        Translator $translator,
+        ColorRotate $colorRotate,
+        RequestScopeMatcher $scopeMatcher,
+        TabRegistry $tabRegistry,
+        ?GridProvider $gridProvider,
+        string $column = 'main'
+    ) {
+        parent::__construct($model, $templateEngine, $column);
+
+        $this->translator   = $translator;
+        $this->colorRotate  = $colorRotate;
+        $this->scopeMatcher = $scopeMatcher;
+        $this->tabRegistry  = $tabRegistry;
+        $this->gridProvider = $gridProvider;
+    }
+
     /**
      * {@inheritdoc}
      */
-    public function generate()
+    public function generate(): string
     {
         if ($this->isBackendRequest()) {
             $iterator = $this->getIterator();
@@ -53,7 +127,7 @@ abstract class AbstractTabElement extends ContentElement
      */
     protected function getTabRegistry(): TabRegistry
     {
-        return static::getContainer()->get('contao_bootstrap.tab.tab_registry');
+        return $this->tabRegistry;
     }
 
     /**
@@ -63,33 +137,24 @@ abstract class AbstractTabElement extends ContentElement
      * @param NavigationIterator $iterator Iterator.
      *
      * @return string
-     *
-     * @SuppressWarnings(PHPMD.Superglobals)
      */
     protected function renderBackendView($start, NavigationIterator $iterator = null): string
     {
-        $template = new BackendTemplate('be_bs_tab');
-
         $parent = $this->getParent();
-        if ($parent) {
-            $template->name = $parent->bs_tab_name;
-        }
 
-        if ($start) {
-            $colorRotate = static::getContainer()->get('contao_bootstrap.core.helper.color_rotate');
-
-            $template->color = $colorRotate->getColor('ce:' . $start->id);
-        }
-
-        if (!$start) {
-            $template->error = $GLOBALS['TL_LANG']['ERR']['bsTabParentMissing'];
-        }
-
-        if ($iterator) {
-            $template->title = $iterator->currentTitle();
-        }
-
-        return $template->parse();
+        return $this->render(
+            new ToolkitTemplateReference(
+                'be_bs_tab',
+                'html5',
+                ToolkitTemplateReference::SCOPE_BACKEND
+            ),
+            [
+                'name'  => $parent ? $parent->bs_tab_name : null,
+                'color' => $start ? $this->rotateColor('ce:' . $start->id) : null,
+                'error' => $start ? null : $this->translator->trans('ERR.bsTabParentMissing', [], 'contao_default'),
+                'title' => $iterator ? $iterator->currentTitle() : null,
+            ]
+        );
     }
 
     /**
@@ -99,10 +164,7 @@ abstract class AbstractTabElement extends ContentElement
      */
     protected function isBackendRequest(): bool
     {
-        $scopeMatcher   = static::getContainer()->get('contao.routing.scope_matcher');
-        $currentRequest = static::getContainer()->get('request_stack')->getCurrentRequest();
-
-        return $scopeMatcher->isBackendRequest($currentRequest);
+        return $this->scopeMatcher->isBackendRequest();
     }
 
     /**
@@ -130,9 +192,9 @@ abstract class AbstractTabElement extends ContentElement
      *
      * @return ContentModel|null
      */
-    protected function getParent():? ContentModel
+    protected function getParent(): ?ContentModel
     {
-        return ContentModel::findByPk($this->bs_tab_parent);
+        return ContentModel::findByPk($this->get('bs_tab_parent'));
     }
 
     /**
@@ -142,21 +204,30 @@ abstract class AbstractTabElement extends ContentElement
      */
     protected function getGridIterator(): ?GridIterator
     {
-        $parent  = $this->getParent();
-        $bundles = static::getContainer()->getParameter('kernel.bundles');
+        $parent = $this->getParent();
 
-        if (!$parent || !isset($bundles['ContaoBootstrapGridBundle']) || !$parent->bs_grid) {
+        if (!$parent || !$this->gridProvider || !$parent->bs_grid) {
             return null;
         }
 
-        $provider = $this->getContainer()->get('contao_bootstrap.grid.grid_provider');
-
         try {
-            $gridIterator = $provider->getIterator('ce:' . $parent->id, (int) $parent->bs_grid);
+            $gridIterator = $this->gridProvider->getIterator('ce:' . $parent->id, (int) $parent->bs_grid);
 
             return $gridIterator;
         } catch (\RuntimeException $e) {
             return null;
         }
+    }
+
+    /**
+     * Rotate the color for an identifier.
+     *
+     * @param string $identifier The color identifier.
+     *
+     * @return string
+     */
+    protected function rotateColor(string $identifier): string
+    {
+        return $this->colorRotate->getColor($identifier);
     }
 }

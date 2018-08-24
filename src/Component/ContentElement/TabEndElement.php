@@ -18,29 +18,32 @@ namespace ContaoBootstrap\Tab\Component\ContentElement;
 /**
  * Class TabSeparatorElement
  */
-class TabEndElement extends AbstractTabElement
+final class TabEndElement extends AbstractTabElement
 {
     /**
      * Template name.
      *
      * @var string
      */
-    protected $strTemplate = 'ce_bs_tab_end';
+    protected $templateName = 'ce_bs_tab_end';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    protected function compile()
+    protected function prepareTemplateData(array $data): array
     {
-        $this->Template->grid = $this->getGridIterator();
+        $data         = parent::prepareTemplateData($data);
+        $data['grid'] = $this->getGridIterator();
 
         if ($iterator = $this->getIterator()) {
-            $this->Template->navigation = $iterator->navigation();
+            $data['navigation'] = $iterator->navigation();
         }
 
         if ($parent = $this->getParent()) {
-            $this->Template->showNavigation = $parent->bs_tab_nav_position === 'after';
-            $this->Template->navClass       = $parent->bs_tab_nav_class;
+            $data['showNavigation'] = $parent->bs_tab_nav_position === 'after';
+            $data['navClass']       = $parent->bs_tab_nav_class;
         }
+
+        return $data;
     }
 }

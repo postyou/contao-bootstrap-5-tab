@@ -18,24 +18,25 @@ namespace ContaoBootstrap\Tab\Component\ContentElement;
 /**
  * Class TabSeparatorElement
  */
-class TabSeparatorElement extends AbstractTabElement
+final class TabSeparatorElement extends AbstractTabElement
 {
     /**
      * Template name.
      *
      * @var string
      */
-    protected $strTemplate = 'ce_bs_tab_separator';
+    protected $templateName = 'ce_bs_tab_separator';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    protected function compile()
+    protected function prepareTemplateData(array $data): array
     {
         $iterator = $this->getIterator();
         $parent   = $this->getParent();
+        $data     = parent::prepareTemplateData($data);
 
-        $this->Template->fade = ($parent && $parent->bs_tab_fade) ? ' fade' : '';
+        $data['fade'] = ($parent && $parent->bs_tab_fade) ? ' fade' : '';
 
         if ($iterator) {
             $iterator->next();
@@ -43,12 +44,14 @@ class TabSeparatorElement extends AbstractTabElement
             if ($iterator->valid()) {
                 $currentItem = $iterator->current();
 
-                $this->Template->currentItem = $currentItem;
+                $data['currentItem'] = $currentItem;
 
                 if ($parent->bs_tab_fade && $currentItem && $currentItem->active()) {
-                    $this->Template->fade .= ' show';
+                    $data['fade'] = rtrim($data['fade'] . ' show');
                 }
             }
         }
+
+        return $data;
     }
 }

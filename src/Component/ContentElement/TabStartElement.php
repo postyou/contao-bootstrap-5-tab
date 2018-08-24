@@ -15,30 +15,30 @@ declare(strict_types=1);
 
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
-use Assert\AssertionFailedException;
 use Contao\ContentModel;
-use ContaoBootstrap\Tab\View\Tab\NavigationIterator;
 
 /**
  * Class TabSeparatorElement
  */
-class TabStartElement extends AbstractTabElement
+final class TabStartElement extends AbstractTabElement
 {
     /**
      * Template name.
      *
      * @var string
      */
-    protected $strTemplate = 'ce_bs_tab_start';
+    protected $templateName = 'ce_bs_tab_start';
 
     /**
-     * {@inheritdoc}
+     * {@inheritDoc}
      */
-    protected function compile()
+    protected function prepareTemplateData(array $data): array
     {
-        $this->Template->fade     = $this->bs_tab_fade ? ' fade' : '';
-        $this->Template->grid     = $this->getGridIterator();
-        $this->Template->navClass = $this->bs_tab_nav_class;
+        $data = parent::prepareTemplateData($data);
+
+        $data['fade']     = $this->get('bs_tab_fade') ? ' fade' : '';
+        $data['grid']     = $this->getGridIterator();
+        $data['navClass'] = $this->get('bs_tab_nav_class');
 
         $iterator = $this->getIterator();
         if ($iterator) {
@@ -46,19 +46,21 @@ class TabStartElement extends AbstractTabElement
 
             $currentItem = $iterator->current();
 
-            $this->Template->navigation  = $iterator->navigation();
-            $this->Template->currentItem = $currentItem;
+            $data['navigation']  = $iterator->navigation();
+            $data['currentItem'] = $currentItem;
 
-            if ($this->bs_tab_fade && $currentItem && $currentItem->active()) {
-                $this->Template->fade .= ' show';
+            if ($this->get('bs_tab_fade') && $currentItem && $currentItem->active()) {
+                $data['fade'] = rtrim($data['fade'] .= ' show');
             }
         }
+
+        return $data;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function generate()
+    public function generate(): string
     {
         if ($this->isBackendRequest()) {
             $iterator = $this->getIterator();
