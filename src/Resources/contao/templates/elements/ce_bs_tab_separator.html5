@@ -1,0 +1,6 @@
+    </div>
+    <?php if ($this->currentItem): ?>
+    <div class="tab-pane<?= $this->fade ?><?php if ($this->currentItem->active()): ?> active<?php endif ?>" id="<?= $this->currentItem->cssId() ?>" role="tabpanel" aria-labelledby="<?= $this->currentItem->navCssId() ?>">
+    <?php else: ?>
+    <div class="tab-pane" role="tabpanel">
+    <?php endif ?>

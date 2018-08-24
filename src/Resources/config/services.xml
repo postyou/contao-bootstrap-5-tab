@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="contao_bootstrap.tab.tab_registry" class="ContaoBootstrap\Tab\View\Tab\TabRegistry" />
+
+        <service id="ContaoBootstrap\Tab\Component\ContentElement\TabElementFactory" >
+            <argument type="service" id="templating" />
+            <argument type="service" id="translator" />
+            <argument type="service" id="contao_bootstrap.core.helper.color_rotate" />
+            <argument type="service" id="netzmacht.contao_toolkit.routing.scope_matcher" />
+            <argument type="service" id="contao_bootstrap.tab.tab_registry" />
+            <tag name="netzmacht.contao_toolkit.component.content_element_factory" />
+            <tag name="netzmacht.contao_toolkit.component.content_element" category="bootstrap_tabs" alias="bs_tab_start" />
+            <tag name="netzmacht.contao_toolkit.component.content_element" category="bootstrap_tabs" alias="bs_tab_separator" />
+            <tag name="netzmacht.contao_toolkit.component.content_element" category="bootstrap_tabs" alias="bs_tab_end" />
+        </service>
+    </services>
+</container>
