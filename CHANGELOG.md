@@ -4,7 +4,7 @@ Changelog
 2.0.4 (2018-12-18)
 ------------------
 
-[Full Changelog](https://github.com/contao-bootstrap/tab/compare/2.0.1..2.0.3)
+[Full Changelog](https://github.com/contao-bootstrap/tab/compare/2.0.3...2.0.4)
 
 ### Changed
 
@@ -13,7 +13,7 @@ Changelog
 2.0.3 (2018-08-24)
 ------------------
 
-[Full Changelog](https://github.com/contao-bootstrap/tab/compare/2.0.1..2.0.3)
+[Full Changelog](https://github.com/contao-bootstrap/tab/compare/2.0.1...2.0.3)
 
 
 ### Fixed
@@ -29,7 +29,7 @@ Changelog
 2.0.1 (2018-08-24)
 ------------------
 
-[Full Changelog](https://github.com/contao-bootstrap/tab/compare/2.0.0..2.0.1)
+[Full Changelog](https://github.com/contao-bootstrap/tab/compare/2.0.0...2.0.1)
 
 
 ### Changed
