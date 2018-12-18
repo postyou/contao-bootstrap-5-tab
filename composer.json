@@ -24,7 +24,7 @@
         "contao-bootstrap/core": "~2.0",
         "contao-community-alliance/meta-palettes":"~2.0 || ~1.11",
         "menatwork/contao-multicolumnwizard":"~3.2",
-        "beberlei/assert": "^2.9",
+        "beberlei/assert": "^2.9 || ^3.0",
         "netzmacht/html": "~2.0",
         "symfony/config": "^3.3 || ^4.0",
         "symfony/dependency-injection": "^3.3 || ^4.0",
