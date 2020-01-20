@@ -23,11 +23,11 @@
         "contao/core-bundle":"^4.4",
         "contao-bootstrap/core": "~2.0",
         "contao-community-alliance/meta-palettes":"~2.0 || ~1.11",
-        "menatwork/contao-multicolumnwizard":"~3.2",
+        "menatwork/contao-multicolumnwizard-bundle":"~3.2",
         "beberlei/assert": "^2.9 || ^3.0",
         "netzmacht/html": "~2.0",
         "symfony/config": "^3.3 || ^4.0",
-        "symfony/dependency-injection": "^3.3 || ^4.0",
+        "symfony/dependency-injection": "^3.4.26 || ^4.1.12",
         "symfony/http-kernel": "^3.3 || ^4.0",
         "symfony/templating": "^3.3 || ^4.0",
         "symfony/translation": "^3.3 || ^4.0",
@@ -56,8 +56,7 @@
         },
         "branch-alias": {
             "dev-master": "2.0.x-dev",
-            "dev-develop": "2.1.x-dev",
-            "dev-support/1.0.x": "1.0.x-dev"
+            "dev-develop": "2.1.x-dev"
         }
     }
 }
