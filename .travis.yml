@@ -8,6 +8,7 @@ addons:
 language: php
 
 php:
+  - "7.4"
   - "7.3"
   - "7.2"
   - "7.1"
@@ -16,9 +17,14 @@ env:
   - CONTAO_VERSION=contao/core-bundle ~4.4.0
   - CONTAO_VERSION=contao/core-bundle ~4.5.0
   - CONTAO_VERSION=contao/core-bundle ~4.6.0
+  - CONTAO_VERSION=contao/core-bundle ~4.7.0
 
 matrix:
-  exclude:
+  allow_failures:
+    - php: "nightly"
+    - env: CONTAO_VERSION=contao/core-bundle ~4.5.0
+    - env: CONTAO_VERSION=contao/core-bundle ~4.6.0
+    - env: CONTAO_VERSION=contao/core-bundle ~4.7.0
 
 install:
   - echo "memory_limit = -1" > travis.php.ini && phpenv config-add travis.php.ini
@@ -29,7 +35,7 @@ install:
 script: ant -keep-going
 
 git:
-  depth: 2147483647
+  depth: false
 
 cache:
   directories:
