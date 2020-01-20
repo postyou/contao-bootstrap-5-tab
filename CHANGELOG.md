@@ -1,6 +1,19 @@
 Changelog
 =========
 
+2.0.5 (2020-01-20)
+------------------
+
+[Full Changelog](https://github.com/contao-bootstrap/tab/compare/2.0.4...2.0.5)
+
+### Changed
+
+ - Allow symfony/templating ^5.0
+ 
+### Fixed
+
+ - Fix indents in backend view ([#7](https://github.com/contao-bootstrap/tab/issues/7))
+
 2.0.4 (2018-12-18)
 ------------------
 
