@@ -24,5 +24,5 @@ $GLOBALS['TL_CTE']['bootstrap_tabs']['bs_tab_end']       = TabEndElement::class;
 
 // Wrapper settings
 $GLOBALS['TL_WRAPPERS']['start'][]     = 'bs_tab_start';
-$GLOBALS['TL_WRAPPERS']['stop'][]      = 'bs_tab_separator';
-$GLOBALS['TL_WRAPPERS']['separator'][] = 'bs_tab_end';
+$GLOBALS['TL_WRAPPERS']['separator'][] = 'bs_tab_separator';
+$GLOBALS['TL_WRAPPERS']['stop'][]      = 'bs_tab_end';
