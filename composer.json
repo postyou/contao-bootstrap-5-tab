@@ -1,6 +1,6 @@
 {
     "name":"postyou/contao-bootstrap-tab",
-    "description":"Bootstrap tab component for Contao CMS",
+    "description":"Bootstrap 5 tab component for Contao CMS",
     "keywords":["bootstrap", "Contao", "tab", "component"],
     "type":"contao-bundle",
     "license":"LGPL-3.0-or-later",
@@ -10,13 +10,18 @@
             "email":"mail@netzmacht.de",
             "homepage":"https://netzmacht.de",
             "role":"Developer"
+        },
+        {
+            "name":"Mario Gienapp",
+            "email":"mario.gienapp@postyou.de",
+            "homepage":"https://www.postyou.de",
+            "role":"Developer"
         }
     ],
     "support":{
-        "email":"mail@netzmacht.de",
-        "issues":"https://github.com/contao-bootstrap/tab/issues",
-        "wiki":"http://contao-bootstrap.netzmacht.de",
-        "source":"https://github.com/contao-bootstrap/tab"
+        "email":"mario.gienapp@postyou.de",
+        "issues":"https://github.com/postyou/contao-bootstrap-tab/issues",
+        "source":"https://github.com/postyou/contao-bootstrap-tab"
     },
     "require":{
         "php":"^7.1 || ^8.0",
