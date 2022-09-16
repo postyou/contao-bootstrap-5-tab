@@ -59,10 +59,10 @@ final class ContaoBootstrapTabExtension extends Extension
 
         $bundles = $container->getParameter('kernel.bundles');
 
-        if (!isset($bundles['ContaoBootstrapGridBundle'])) {
-            return;
-        }
+        // if (!isset($bundles['ContaoBootstrapGridBundle'])) {
+        //     return;
+        // }
 
-        $definition->setArgument(5, new Reference('contao_bootstrap.grid.grid_provider'));
+        // $definition->setArgument(5, new Reference('contao_bootstrap.grid.grid_provider'));
     }
 }
