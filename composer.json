@@ -1,5 +1,5 @@
 {
-    "name":"contao-bootstrap/tab",
+    "name":"postyou/contao-bootstrap-5-tab",
     "description":"Bootstrap tab component for Contao CMS",
     "keywords":["bootstrap", "Contao", "tab", "component"],
     "type":"contao-bundle",
