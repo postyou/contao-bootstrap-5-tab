@@ -1,6 +1,14 @@
 Changelog
 =========
 
+1.0.0 (2022-09-16)
+------------------
+
+### Changed
+
+ - Remove netzmacht bootstrap dependencies
+ - include Bootstrap tab javascript
+
 2.0.5 (2020-01-20)
 ------------------
 
