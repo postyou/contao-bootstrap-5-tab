@@ -19,7 +19,7 @@
         "source":"https://github.com/contao-bootstrap/tab"
     },
     "require":{
-        "php":"^7.1 || ^8,0",
+        "php":"^7.1 || ^8.0",
         "contao/core-bundle":"^4.4",
         "contao-community-alliance/meta-palettes":"~2.0 || ~1.11",
         "menatwork/contao-multicolumnwizard-bundle":"~3.2",
