@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.0 (2022-09-16) -- first version after fork
+1.0.0 (2022-09-16) -- first version of this fork
 ------------------
 
 ### Changed
