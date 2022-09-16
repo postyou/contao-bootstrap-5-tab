@@ -47,6 +47,10 @@ abstract class AbstractTabElement extends AbstractContentElementController
         // $this->requestStack = $requestStack;
         $this->scopeMatcher = $scopeMatcher;
         $this->tabRegistry = $tabRegistry;
+
+        $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaobootstraptab/js/dom/event-handler.js';
+        $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaobootstraptab/js/base-component.js';
+        $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaobootstraptab/js/tab.js';
     }
 
 

@@ -1,4 +1,3 @@
-<?php dump($this) ?>
 <?php if ($this->navigation): ?>
 <ul class="nav <?= $this->navClass ?: 'nav-tabs' ?>" role="tablist">
     <?php foreach($this->navigation->items() as $item): ?>

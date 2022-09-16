@@ -33,10 +33,6 @@ final class TabStartElement extends AbstractTabElement
      */
     protected $templateName = 'ce_bs_tab_start';
 
-    protected function __construct()
-    {
-        $GLOBALS['TL_JAVASCRIPT'] = 'bundles/';
-    }
 
     /**
      * {@inheritDoc}
