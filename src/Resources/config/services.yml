@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  # contao_bootstrap.tab.tab_registry:
+  #   class: ContaoBootstrap\Tab\View\Tab\TabRegistry
+  #   public: true
+
+  ContaoBootstrap\Tab\View\Tab\TabRegistry:
+
+  ContaoBootstrap\Tab\Component\ContentElement\:
+    resource: ../../Component/ContentElement
+    public: true

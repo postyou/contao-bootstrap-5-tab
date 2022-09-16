@@ -27,25 +27,13 @@
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",
-        "phpcq/all-tasks": "^1.2",
-        "contao-bootstrap/grid": "^2.0"
-    },
-    "suggest": {
-        "contao-bootstrap/grid": "Use grid component for horizontal aligned tab navigation."
+        "phpcq/all-tasks": "^1.2"
     },
     "autoload": {
         "psr-4": { "ContaoBootstrap\\Tab\\": "src/" }
     },
     "extra":{
         "contao-manager-plugin": "ContaoBootstrap\\Tab\\ContaoManager\\Plugin",
-        "contao": {
-            "transifex": {
-                "project": "contao-bootstrap",
-                "prefix": "tab-",
-                "languages_cto": "src/Resources/contao/languages",
-                "languages_tx": ".tx"
-            }
-        },
         "branch-alias": {
             "dev-master": "2.0.x-dev",
             "dev-develop": "2.1.x-dev"

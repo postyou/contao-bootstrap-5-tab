@@ -16,12 +16,12 @@
  */
 
 $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = [
-    'contao_bootstrap.tab.listener.dca.content',
+    'ContaoBootstrap\Tab\EventListener\Dca\ContentListener',
     'initializeDca',
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = [
-    'contao_bootstrap.tab.listener.dca.content',
+    'ContaoBootstrap\Tab\EventListener\Dca\ContentListener',
     'generateColumns',
 ];
 
@@ -62,7 +62,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['bs_tab_parent'] = [
     'label'            => &$GLOBALS['TL_LANG']['tl_content']['bs_tab_parent'],
     'exclude'          => true,
     'inputType'        => 'select',
-    'options_callback' => ['contao_bootstrap.tab.listener.dca.content', 'getTabParentOptions'],
+    'options_callback' => ['ContaoBootstrap\Tab\EventListener\Dca\ContentListener', 'getTabParentOptions'],
     'reference'        => &$GLOBALS['TL_LANG']['tl_content'],
     'eval'             => [
         'mandatory'          => true,

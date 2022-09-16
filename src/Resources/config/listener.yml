@@ -1,0 +1,4 @@
+services:
+    contao_bootstrap.tab.listener.dca.content:
+        class: ContaoBootstrap\Tab\EventListener\Dca\ContentListener
+        public: true

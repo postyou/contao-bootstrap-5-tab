@@ -2,8 +2,7 @@
     </div>
 
     <?php if ($this->showNavigation): ?>
-        <?php if ($this->grid): ?></div><div class="<?= $this->grid->current() ?>"><?php endif ?>
         <?= $this->insert('bs_tab_nav', $this->getData()) ?>
     <?php endif ?>
-    <?php if ($this->grid): ?></div><?php endif ?>
+
 </div>

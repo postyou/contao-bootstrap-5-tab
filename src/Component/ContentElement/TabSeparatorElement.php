@@ -15,8 +15,14 @@ declare(strict_types=1);
 
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
+use Contao\ContentModel;
+use Contao\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Contao\CoreBundle\ServiceAnnotation\ContentElement;
+
 /**
- * Class TabSeparatorElement
+ * @ContentElement("bs_tab_separator",category="bootstrap_tabs")
  */
 final class TabSeparatorElement extends AbstractTabElement
 {
@@ -27,16 +33,13 @@ final class TabSeparatorElement extends AbstractTabElement
      */
     protected $templateName = 'ce_bs_tab_separator';
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function prepareTemplateData(array $data): array
+    protected function getResponse(Template $template, ContentModel $model, Request $request): Response
     {
-        $iterator = $this->getIterator();
-        $parent   = $this->getParent();
-        $data     = parent::prepareTemplateData($data);
+        $iterator = $this->getIterator($model);
+        $parent   = $this->getParent($model);
+        // $data     = parent::prepareTemplateData($data);
 
-        $data['fade'] = ($parent && $parent->bs_tab_fade) ? ' fade' : '';
+        $template->fade = ($parent && $parent->bs_tab_fade) ? ' fade' : '';
 
         if ($iterator) {
             $iterator->next();
@@ -44,14 +47,15 @@ final class TabSeparatorElement extends AbstractTabElement
             if ($iterator->valid()) {
                 $currentItem = $iterator->current();
 
-                $data['currentItem'] = $currentItem;
+                $template->currentItem = $currentItem;
 
                 if ($parent->bs_tab_fade && $currentItem && $currentItem->active()) {
-                    $data['fade'] = rtrim($data['fade'] . ' show');
+                    $template->fade = rtrim($template->fade . ' show');
                 }
             }
         }
 
-        return $data;
+
+        return $template->getResponse();    
     }
 }

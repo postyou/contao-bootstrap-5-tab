@@ -1,3 +1,4 @@
+<?php dump($this) ?>
 <?php if ($this->navigation): ?>
 <ul class="nav <?= $this->navClass ?: 'nav-tabs' ?>" role="tablist">
     <?php foreach($this->navigation->items() as $item): ?>
@@ -28,15 +29,15 @@
     </li>
     <?php else: ?>
     <li class="nav-item">
-        <a class="nav-link<?php if ($item->active()):?> active<?php endif ?>"
-           href="#<?= $item->cssId() ?>"
+        <button class="nav-link<?php if ($item->active()):?> active<?php endif ?>"
+           data-bs-target="#<?= $item->cssId() ?>"
            id="<?= $item->navCssId() ?>"
-           data-toggle="tab"
+           data-bs-toggle="tab"
            role="tab"
            aria-controls="<?= $item->cssId() ?>"
            aria-selected="<?= $item->active() ? 'true': 'false' ?>">
             <?= $item->title() ?>
-        </a>
+        </button>
     </li>
     <?php endif ?>
     <?php endforeach ?>

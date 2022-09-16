@@ -15,8 +15,14 @@ declare(strict_types=1);
 
 namespace ContaoBootstrap\Tab\Component\ContentElement;
 
+use Contao\ContentModel;
+use Contao\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Contao\CoreBundle\ServiceAnnotation\ContentElement;
+
 /**
- * Class TabSeparatorElement
+ * @ContentElement("bs_tab_end",category="bootstrap_tabs")
  */
 final class TabEndElement extends AbstractTabElement
 {
@@ -27,23 +33,17 @@ final class TabEndElement extends AbstractTabElement
      */
     protected $templateName = 'ce_bs_tab_end';
 
-    /**
-     * {@inheritDoc}
-     */
-    protected function prepareTemplateData(array $data): array
+    protected function getResponse(Template $template, ContentModel $model, Request $request): Response
     {
-        $data         = parent::prepareTemplateData($data);
-        $data['grid'] = $this->getGridIterator();
-
-        if ($iterator = $this->getIterator()) {
-            $data['navigation'] = $iterator->navigation();
+        if ($iterator = $this->getIterator($model)) {
+           $template->navigation = $iterator->navigation();
         }
 
-        if ($parent = $this->getParent()) {
-            $data['showNavigation'] = $parent->bs_tab_nav_position === 'after';
-            $data['navClass']       = $parent->bs_tab_nav_class;
+        if ($parent = $this->getParent($model)) {
+            $template->showNavigation = $parent->bs_tab_nav_position === 'after';
+            $template->navClass       = $parent->bs_tab_nav_class;
         }
 
-        return $data;
+        return $template->getResponse();    
     }
 }

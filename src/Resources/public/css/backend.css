@@ -29,3 +29,26 @@
 .bs-tabs .multicolumnwizard .tl_imageSize_0 {
     margin-left: 0;
 }
+
+.wrapper_start, 
+.wrapper_stop {
+    background: #eaeaea;
+}
+
+.nav-tabs {
+    display: flex;
+}
+
+.nav-tabs li + li {
+    margin-left: 0.5em;
+}
+
+.nav-tabs button {
+    appearance: none;
+    border-style: solid;
+    border-bottom: 0;
+    padding: 0.5em 1em;
+    border-color: rgb(180, 180, 180);
+    border-radius: 12px 12px 0 0;
+    background-color: #fff;
+}

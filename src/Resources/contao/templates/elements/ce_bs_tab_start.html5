@@ -6,19 +6,14 @@
 <?php endif; ?>
 <?php $this->endblock(); ?>
 
-<?php if ($this->grid): ?>
-<div class="row">
-    <div class="<?= $this->grid->current(); $this->grid->next() ?>">
-<?php endif ?>
-
 <?php if ($this->bs_tab_nav_position !== 'after'): ?>
-<?= $this->insert('bs_tab_nav', $this->getData()) ?>
+<?= $this->insert('navigation/bs_tab_nav', $this->getData()) ?>
 <?php if ($this->grid): ?></div><div class="<?= $this->grid->current() ?>"><?php endif ?>
 <?php endif ?>
 
 <div class="tab-content<?php if ($this->bs_tab_content_class): ?> <?= $this->bs_tab_content_class ?><?php endif; ?>">
     <?php if ($this->currentItem): ?>
-    <div class="tab-pane<?= $this->fade ?><?php if ($this->currentItem->active()): ?> active<?php endif ?>" id="<?= $this->currentItem->cssId() ?>" role="tabpanel" aria-labelledby="<?= $this->currentItem->navCssId() ?>">
+    <div class="tab-pane <?= $this->fade ?><?php if ($this->currentItem->active()): ?> active<?php endif ?>" id="<?= $this->currentItem->cssId() ?>" role="tabpanel" aria-labelledby="<?= $this->currentItem->navCssId() ?>">
     <?php else: ?>
     <div class="tab-pane" role="tabpanel">
     <?php endif ?>

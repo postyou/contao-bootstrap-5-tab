@@ -17,7 +17,7 @@ namespace ContaoBootstrap\Tab\EventListener\Dca;
 
 use Contao\ContentModel;
 use Contao\CoreBundle\Framework\Adapter;
-use Contao\CoreBundle\Framework\ContaoFrameworkInterface as ContaoFramework;
+use Contao\CoreBundle\Framework\ContaoFramework;
 use Contao\Database\Result;
 use Contao\DataContainer;
 use Contao\Model;
@@ -30,30 +30,7 @@ use Contao\StringUtil;
  */
 final class ContentListener
 {
-    /**
-     * Contao framework.
-     *
-     * @var ContaoFramework
-     */
-    private $framework;
 
-    /**
-     * Content Model repository.
-     *
-     * @var Adapter|ContentModel
-     */
-    private $repository;
-
-    /**
-     * ContentDataContainer constructor.
-     *
-     * @param ContaoFramework $framework Contao framework.
-     */
-    public function __construct(ContaoFramework $framework)
-    {
-        $this->framework  = $framework;
-        $this->repository = $this->framework->getAdapter(ContentModel::class);
-    }
 
     /**
      * Initialize the dca.
@@ -65,13 +42,6 @@ final class ContentListener
     public function initializeDca(): void
     {
         $GLOBALS['TL_CSS'][] = 'bundles/contaobootstraptab/css/backend.css';
-
-        if (isset($GLOBALS['TL_DCA']['tl_content']['fields']['bs_grid'])) {
-            $GLOBALS['TL_DCA']['tl_content']['fields']['bs_grid']['load_callback'][] = [
-                'contao_bootstrap.tab.listener.dca.content',
-                'configureGridField',
-            ];
-        }
     }
 
     /**
@@ -91,7 +61,7 @@ final class ContentListener
         $values[] = CURRENT_ID;
         $values[] = $GLOBALS['TL_DCA']['tl_content']['config']['ptable'];
 
-        $collection = $this->repository->findBy($columns, $values);
+        $collection = ContentModel::findBy($columns, $values);
         $options    = [];
 
         if ($collection) {
@@ -105,25 +75,6 @@ final class ContentListener
         }
 
         return $options;
-    }
-
-    /**
-     * Configure the grid field.
-     *
-     * @param mixed              $value         The field value.
-     * @param DataContainer|null $dataContainer The data container driver.
-     *
-     * @return mixed
-     *
-     * @SuppressWarnings(PHPMD.Superglobals)
-     */
-    public function configureGridField($value, $dataContainer)
-    {
-        if ($dataContainer->activeRecord->type === 'bs_tab_start') {
-            $GLOBALS['TL_DCA']['tl_content']['fields']['bs_grid']['eval']['mandatory'] = false;
-        }
-
-        return $value;
     }
 
     /**
@@ -173,7 +124,7 @@ final class ContentListener
             }
         }
 
-        $count -= $this->repository->countBy(
+        $count -= ContentModel::countBy(
             [
                 'tl_content.ptable=?',
                 'tl_content.pid=?',
@@ -274,7 +225,7 @@ final class ContentListener
      */
     protected function getNextElements($current): array
     {
-        $collection = $this->repository->findBy(
+        $collection = ContentModel::findBy(
             [
                 'tl_content.ptable=?',
                 'tl_content.pid=?',
@@ -300,7 +251,7 @@ final class ContentListener
      */
     protected function getStopElement($current): Model
     {
-        $stopElement = $this->repository->findOneBy(
+        $stopElement = ContentModel::findOneBy(
             ['tl_content.type=?', 'tl_content.bs_tab_parent=?'],
             ['bs_tab_end', $current->id]
         );
