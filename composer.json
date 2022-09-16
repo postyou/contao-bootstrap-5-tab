@@ -23,9 +23,7 @@
         "contao/core-bundle":"^4.4",
         "contao-community-alliance/meta-palettes":"~2.0 || ~1.11",
         "menatwork/contao-multicolumnwizard-bundle":"~3.2",
-        "beberlei/assert": "^2.9 || ^3.0",
-        "netzmacht/html": "~2.0",
-        "netzmacht/contao-toolkit": "^3.0"
+        "beberlei/assert": "^2.9 || ^3.0"
     },
     "require-dev": {
         "contao/manager-plugin": "^2.0",
