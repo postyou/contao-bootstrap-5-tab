@@ -21,6 +21,7 @@ use ContaoBootstrap\Tab\View\Tab\NavigationIterator;
 use ContaoBootstrap\Tab\View\Tab\TabRegistry;
 use Contao\CoreBundle\Controller\ContentElement\AbstractContentElementController;
 use Contao\CoreBundle\Routing\ScopeMatcher;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class AbstractTabElement
@@ -41,12 +42,15 @@ abstract class AbstractTabElement extends AbstractContentElementController
      */
     private $tabRegistry;
 
+    private $requestStack;
 
-    public function __construct(ScopeMatcher $scopeMatcher, TabRegistry $tabRegistry)
+
+    public function __construct(ScopeMatcher $scopeMatcher, TabRegistry $tabRegistry, RequestStack $requestStack)
     {
         // $this->requestStack = $requestStack;
         $this->scopeMatcher = $scopeMatcher;
         $this->tabRegistry = $tabRegistry;
+        $this->requestStack = $requestStack;
 
         $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaobootstraptab/js/dom/event-handler.js';
         $GLOBALS['TL_JAVASCRIPT'][] = 'bundles/contaobootstraptab/js/base-component.js';
@@ -74,7 +78,7 @@ abstract class AbstractTabElement extends AbstractContentElementController
      */
     protected function isBackendRequest(): bool
     {
-        return $this->scopeMatcher->isBackendRequest();
+        return $this->scopeMatcher->isBackendRequest($this->requestStack->getCurrentRequest());
     }
 
     /**

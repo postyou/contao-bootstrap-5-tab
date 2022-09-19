@@ -26,24 +26,22 @@ use Contao\CoreBundle\ServiceAnnotation\ContentElement;
  */
 final class TabEndElement extends AbstractTabElement
 {
-    /**
-     * Template name.
-     *
-     * @var string
-     */
-    protected $templateName = 'ce_bs_tab_end';
 
     protected function getResponse(Template $template, ContentModel $model, Request $request): Response
     {
-        if ($iterator = $this->getIterator($model)) {
-           $template->navigation = $iterator->navigation();
-        }
 
-        if ($parent = $this->getParent($model)) {
-            $template->showNavigation = $parent->bs_tab_nav_position === 'after';
-            $template->navClass       = $parent->bs_tab_nav_class;
-        }
+            if ($iterator = $this->getIterator($model)) {
+                $template->navigation = $iterator->navigation();
+             }
+     
+             if ($parent = $this->getParent($model)) {
+                 $template->showNavigation = $parent->bs_tab_nav_position === 'after';
+                 $template->navClass       = $parent->bs_tab_nav_class;
+             }
 
-        return $template->getResponse();    
+             $template->isBackendRequest = parent::isBackendRequest();
+             return $template->getResponse();   
+        
+ 
     }
 }

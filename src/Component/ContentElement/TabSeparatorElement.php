@@ -26,12 +26,6 @@ use Contao\CoreBundle\ServiceAnnotation\ContentElement;
  */
 final class TabSeparatorElement extends AbstractTabElement
 {
-    /**
-     * Template name.
-     *
-     * @var string
-     */
-    protected $templateName = 'ce_bs_tab_separator';
 
     protected function getResponse(Template $template, ContentModel $model, Request $request): Response
     {

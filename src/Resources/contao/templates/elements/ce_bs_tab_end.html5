@@ -1,3 +1,5 @@
+
+    <?php if (!$this->isBackendRequest): ?>
         </div>
     </div>
 
@@ -6,3 +8,4 @@
     <?php endif ?>
 
 </div>
+<?php endif; ?>

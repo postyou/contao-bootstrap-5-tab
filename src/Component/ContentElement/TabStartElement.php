@@ -26,13 +26,6 @@ use Contao\CoreBundle\ServiceAnnotation\ContentElement;
  */
 final class TabStartElement extends AbstractTabElement
 {
-    /**
-     * Template name.
-     *
-     * @var string
-     */
-    protected $templateName = 'ce_bs_tab_start';
-
 
     /**
      * {@inheritDoc}
