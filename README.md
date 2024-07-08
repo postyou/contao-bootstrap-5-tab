@@ -20,8 +20,8 @@ See [changelog](CHANGELOG.md)
 Requirements
 ------------
 
- - min. PHP 7.1
- - Contao ~4.4
+ - PHP ^7.1 || ^8.0
+ - Contao ^4.4 || ^5.2
 
 
 Install
