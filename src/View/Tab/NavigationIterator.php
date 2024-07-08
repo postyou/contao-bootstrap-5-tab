@@ -94,11 +94,11 @@ final class NavigationIterator implements \Iterator
             return $this->currentDropdownItem;
         }
 
-        return $this->currentItem;
+        return $this->currentItem ?: null;
     }
 
     /**
-     * Get the nex item.
+     * Get the next item.
      *
      * @return void
      */
